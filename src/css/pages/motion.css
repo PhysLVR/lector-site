@@ -1,0 +1,28 @@
+
+:root{
+  --mv-ease: cubic-bezier(.22,1,.36,1);
+  --mv-dur: .42s;
+}
+
+.btn:not(:disabled):active{transform:scale(.97);transition:transform .12s var(--mv-ease)}
+.btn{transition:transform .25s var(--mv-ease),background .2s,border-color .2s,color .2s,box-shadow .25s}
+
+:where(.fc-card,.fc-grade,.lib-item,.fc-deck,.pg-kpi):focus-visible{
+  outline:2px solid color-mix(in srgb,var(--accent) 70%,transparent);outline-offset:3px;
+}
+
+.fc-sum,
+.fc-deck,
+.fc-create,
+.fc-done,
+.pg-kpi,
+.pg-panel,
+.lib-item{
+  animation-duration:var(--rise-dur);animation-timing-function:var(--ease);
+}
+
+@media (prefers-reduced-motion:reduce){
+  .btn,.fc-card,.fc-grade,.lib-item,.fc-deck{transition:none!important}
+  .btn:not(:disabled):active{transform:none}
+}
+html[data-motion="reduced"] .btn:not(:disabled):active{transform:none}

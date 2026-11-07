@@ -1,0 +1,94 @@
+.app-sheet {
+  position: relative;
+  isolation: isolate;
+}
+.app-sheet::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: var(--sig-texture-opacity, 0);
+  background-repeat: repeat;
+  background-size: 72px 72px;
+}
+.app-sheet > * {
+  position: relative;
+  z-index: 1;
+}
+
+:root[data-preset="iran"] .app-sheet::before {
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      transparent 0 22px,
+      color-mix(in srgb, var(--accent) 7%, transparent) 22px 23px,
+      transparent 23px 44px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent 0 22px,
+      color-mix(in srgb, var(--accent) 7%, transparent) 22px 23px,
+      transparent 23px 44px
+    );
+  background-size: 44px 44px;
+}
+:root[data-preset="iran"][data-theme="light"] .app-sheet::before {
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      transparent 0 22px,
+      color-mix(in srgb, var(--accent) 10%, transparent) 22px 23px,
+      transparent 23px 44px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent 0 22px,
+      color-mix(in srgb, var(--accent) 10%, transparent) 22px 23px,
+      transparent 23px 44px
+    );
+}
+
+@supports not (color: color-mix(in srgb, red, blue)) {
+  .app-sheet::before {
+    background-image: none;
+  }
+}
+
+.app-sheet::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(100%, var(--canvas, 1760px));
+  background: var(--accent);
+  -webkit-mask-image: var(--preset-signature);
+  mask-image: var(--preset-signature);
+  -webkit-mask-size: var(--preset-signature-size);
+  mask-size: var(--preset-signature-size);
+  -webkit-mask-position: var(--preset-signature-position);
+  mask-position: var(--preset-signature-position);
+  -webkit-mask-repeat: var(--preset-signature-repeat, no-repeat);
+  mask-repeat: var(--preset-signature-repeat, no-repeat);
+  opacity: var(--preset-signature-opacity, 0);
+  -webkit-mask-mode: luminance;
+  mask-mode: luminance;
+  pointer-events: none;
+  z-index: -1;
+  transition: opacity 0.5s var(--ease-ios);
+  will-change: opacity;
+}
+
+@media print {
+  .app-sheet::after {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-sheet::after {
+    transition: none;
+  }
+}

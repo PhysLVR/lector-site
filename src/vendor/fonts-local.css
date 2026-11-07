@@ -1,0 +1,23 @@
+/* ═══════════════════════════════════════════════════════════
+   fonts-local.css — فونت‌های کمکی (کاملاً آفلاین)
+   ──────────────────────────────────────────────────────────
+   هر دو فایل variable هستند؛ بازهٔ وزن با font-weight مشخص می‌شود.
+   ═══════════════════════════════════════════════════════════ */
+
+/* Noto Naskh Arabic — گزینهٔ «نسخ» در تنظیمات قلم */
+@font-face {
+  font-family: "Noto Naskh Arabic";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("./fonts/NotoNaskhArabic-VariableFont_wght.ttf") format("truetype");
+}
+
+/* Space Grotesk — ارقام لاتین در KPI، شمارهٔ جلسه و کد */
+@font-face {
+  font-family: "Space Grotesk";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("./fonts/SpaceGrotesk-VariableFont_wght.ttf") format("truetype");
+}

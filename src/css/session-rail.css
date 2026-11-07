@@ -1,0 +1,184 @@
+:root {
+  --sr-w: 44px;
+  --sr-h: 240px;
+  --sr-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --sr-dur: var(--sb-collapse-dur, 400ms);
+  --sr-sb-ease: var(--sb-collapse-ease, cubic-bezier(0.4, 0, 0.2, 1));
+}
+
+.sess-rail {
+  position: fixed;
+  top: 50%;
+  inset-inline-start: calc(var(--sidebar-w, 264px) + 3px);
+  z-index: calc(var(--z-sidebar) - 1);
+  width: var(--sr-w);
+  height: var(--sr-h);
+  margin-top: calc(var(--sr-h) / -2);
+  overflow: hidden; /* جایگزین clip-path — ارزان و روی compositor */
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    inset-inline-start var(--sr-dur) var(--sr-sb-ease),
+    opacity 0.35s var(--ease),
+    visibility 0s linear 0.35s;
+}
+.sess-rail.on {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition:
+    inset-inline-start var(--sr-dur) var(--sr-sb-ease),
+    opacity 0.35s var(--ease),
+    visibility 0s;
+}
+
+.sr-body {
+  position: absolute;
+  inset: 0;
+  transform: translateX(-20px);
+  opacity: 0;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease;
+  will-change: transform, opacity;
+}
+.sess-rail.on .sr-body {
+  transform: none;
+  opacity: 1;
+}
+
+.sr-face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  /* scaleX animation حذف شد — با translateX والد ترکیب و روی compositor انجام می‌شود */
+}
+.sr-face path {
+  fill: var(--surf-solid, var(--bg-2));
+  stroke: none;
+}
+
+
+.sr-wheel {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+  clip-path: var(--sr-clip);
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 20%,
+    #000 80%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 20%, #000 80%, transparent 100%);
+}
+.sr-wheel::-webkit-scrollbar {
+  display: none;
+}
+.sr-list {
+  position: relative;
+  margin: 0;
+  padding: 0 4px 0 0;
+  list-style: none;
+}
+.sr-li {
+  height: 30px;
+}
+.sr-i {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: var(--text-tertiary);
+  transition:
+    opacity 0.6s var(--sr-ease),
+    color 0.3s var(--ease);
+}
+.sr-i span {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  font-size: 11px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  transition:
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    color 0.3s var(--ease),
+    box-shadow 0.42s var(--ease);
+}
+.sr-i span::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--ac);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.32s var(--ease);
+}
+.sr-i.is-cur span::before {
+  opacity: 1;
+}
+.sr-i:hover {
+  color: var(--text-primary);
+}
+.sr-i:hover span {
+  transform: scale(1.06);
+}
+.sr-i:focus-visible {
+  outline: none;
+}
+.sr-i:focus-visible span {
+  outline: var(--ring-width) solid var(--focus-ring);
+  outline-offset: 2px;
+}
+.sr-i.is-cur {
+  color: var(--text-on-accent);
+}
+.sr-i.is-cur span {
+  font-weight: 600;
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--ac) 14%, transparent),
+    0 8px 16px -8px var(--ac);
+}
+
+@media (max-width: 1000px) {
+  .sess-rail {
+    display: none;
+  }
+}
+.sr-i--dummy {
+  pointer-events: none;
+  cursor: default;
+}
+.sr-i--dummy span {
+  width: 6px !important;
+  height: 6px !important;
+  border-radius: 50%;
+  background: var(--text-tertiary);
+  opacity: 0.3;
+  box-shadow: none !important;
+  transition: opacity 0.3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sess-rail,
+  .sr-face,
+  .sr-list,
+  .sr-i {
+    transition-duration: 0.01ms !important;
+  }
+}

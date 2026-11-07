@@ -1,0 +1,79 @@
+/* ─── Halo: هالهٔ محیطی + لبهٔ درخشان نزدیک موس (فقط توسط engine/halo.js) ───
+ * لایه‌ها و اعداد از tokens.css می‌آیند: --z-halo و --halo-*
+ */
+
+#cursor-halo {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 480px;
+  height: 480px;
+  margin: -240px 0 0 -240px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--accent) 6%, transparent) 0%,
+    transparent 60%
+  );
+  will-change: transform, opacity;
+}
+#cursor-halo.is-active {
+  opacity: 1;
+}
+
+/* لایهٔ لبه‌ها: مستقیم زیر body، بدون هیچ isolation/transform والد */
+#halo-layer {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-halo);
+  pointer-events: none;
+}
+
+/* overlay روی هر کاندید؛ فقط حاشیه (۱.۴px) با mask رسم می‌شود */
+.halo-edge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  padding: 1.4px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.16s linear;
+  background: radial-gradient(
+    200px circle at var(--mx, -999px) var(--my, -999px),
+    var(--accent) 0%,
+    color-mix(in srgb, var(--accent) 40%, transparent) 45%,
+    transparent 75%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+/* فقط لبهٔ چپِ ذوزنقه، مطابق شکل مسیر --sr-clip */
+.halo-edge.halo-edge--rail {
+  clip-path: var(--sr-clip, inset(0));
+  padding: 0;
+  border-radius: 0 !important;
+  -webkit-mask: linear-gradient(to right, #000 0px, #000 2px, transparent 2px);
+  -webkit-mask-composite: source-over;
+  mask: linear-gradient(to right, #000 0px, #000 2px, transparent 2px);
+  mask-composite: add;
+}
+
+/* خاموش از تنظیمات یا حالت سبک: هیچ عنصری رندر نمی‌شود */
+html[data-halo="off"] #cursor-halo,
+html[data-halo="off"] #halo-layer,
+html[data-fx-eff="lite"] #cursor-halo,
+html[data-fx-eff="lite"] #halo-layer {
+  display: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #cursor-halo { transition: none; }
+  .halo-edge { transition: none; }
+}

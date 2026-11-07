@@ -1,0 +1,179 @@
+/* ─── اعلان‌ها (toast): کارت‌های روی هم، با نوار رنگی، اقدام و شمارندهٔ تکرار ─── */
+
+#toasts {
+  position: fixed;
+  bottom: calc(var(--s-5) + env(safe-area-inset-bottom, 0px));
+  inset-inline-start: var(--s-5);
+  z-index: var(--z-toast);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  width: min(360px, calc(100vw - var(--s-6)));
+  pointer-events: none;
+}
+
+.toast {
+  --tone: var(--ac);
+  --tone-bg: var(--ac-soft);
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: 16px 16px;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--brd-2);
+  background: color-mix(in srgb, var(--surface-header, var(--surface-raised)) 90%, transparent);
+  backdrop-filter: blur(6px) saturate(1.2);
+  -webkit-backdrop-filter: blur(6px) saturate(1.2);
+  box-shadow: 0 12px 32px -8px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.06);
+  color: var(--txt);
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  overflow: hidden;
+  pointer-events: auto;
+}
+.toast::before {
+  content: "";
+  position: absolute;
+  inset-block: 12px;
+  inset-inline-start: 0;
+  width: 3px;
+  border-radius: 3px;
+  background: var(--tone);
+}
+.toast.ok { --tone: var(--ok); --tone-bg: color-mix(in srgb, var(--ok) 16%, transparent); }
+.toast.err { --tone: var(--bad); --tone-bg: color-mix(in srgb, var(--bad) 14%, transparent); }
+.toast.warn { --tone: var(--warn); --tone-bg: color-mix(in srgb, var(--warn) 16%, transparent); }
+.toast.info {
+  --tone: var(--ac);
+  --tone-bg: color-mix(in srgb, var(--ac) 15%, transparent);
+  border-color: color-mix(in srgb, var(--ac) 30%, var(--brd-2));
+}
+
+.toast-ico {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  margin-top: 0;
+  border-radius: var(--r-md);
+  display: grid;
+  place-items: center;
+  background: var(--tone-bg);
+  color: var(--tone);
+}
+.toast-ico svg { width: 15px; height: 15px; }
+
+.toast-body { 
+  flex: 1; 
+  min-width: 0; 
+  padding-inline-end: 24px; /* فضای امن برای دکمه بستن */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: 2px;
+}
+.toast-title { margin-bottom: 0; font-weight: 600; }
+
+.toast-tx {
+  color: var(--txt);
+  opacity: 0.92;
+  overflow-wrap: anywhere;
+}
+.toast-title + .toast-tx { color: var(--mut); opacity: 1; }
+
+.toast-act {
+  flex: none;
+  align-self: center;
+  margin: 0;
+  margin-inline-end: 28px;
+  padding: 8px 16px;
+  border-radius: var(--r-sm);
+  background: var(--tone);
+  color: var(--text-on-accent, #fff);
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  white-space: nowrap;
+  transition: filter 0.2s, transform 0.1s;
+  cursor: pointer;
+}
+.toast-act:hover {
+  filter: brightness(1.1);
+}
+.toast-act:active {
+  transform: scale(0.96);
+}
+
+.toast-x {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  inset-inline-end: 12px;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  color: var(--mut);
+  z-index: 2;
+  transition: background 0.2s, color 0.2s;
+}
+.toast-x:hover {
+  background: color-mix(in srgb, var(--txt) 10%, transparent);
+  color: var(--txt);
+}
+.toast-x svg { width: 14px; height: 14px; }
+.toast-x:hover { background: var(--surf-2); color: var(--txt); }
+
+.toast-act:focus-visible,
+.toast-x:focus-visible {
+  outline: 2px solid var(--ac);
+  outline-offset: 2px;
+}
+
+.toast-count {
+  position: absolute;
+  top: 15px;
+  inset-inline-end: 44px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: var(--tone-bg);
+  color: var(--tone);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 16px;
+  z-index: 2;
+}
+.toast-count[hidden] { display: none; }
+
+.toast-bar {
+  position: absolute;
+  bottom: 0;
+  inset-inline-start: 0;
+  height: 2px;
+  width: 100%;
+  background: var(--tone);
+  opacity: 0.7;
+  animation: tBar var(--toast-dur, 3.7s) linear forwards;
+}
+.toast-bar[hidden] { display: none; }
+@keyframes tBar {
+  from { width: 100%; }
+  to { width: 0; }
+}
+
+@media (max-width: 640px) {
+  #toasts {
+    inset-inline: var(--s-3);
+    bottom: calc(var(--s-3) + env(safe-area-inset-bottom, 0px));
+    width: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast-bar { animation: none; display: none; }
+}

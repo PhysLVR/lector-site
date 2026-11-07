@@ -1,0 +1,52 @@
+{
+  "generatedBy": "scripts/build-pack-index.mjs",
+  "packs": [
+    {
+      "id": "optics",
+      "scripts": [
+        "./src/packs/optics/sessions/s01.js",
+        "./src/packs/optics/sessions/s02.js",
+        "./src/packs/optics/sessions/s03.js",
+        "./src/packs/optics/sessions/s04.js",
+        "./src/packs/optics/sessions/s05.js",
+        "./src/packs/optics/sessions/s06.js",
+        "./src/packs/optics/sessions/s07.js",
+        "./src/packs/optics/sessions/s08.js",
+        "./src/packs/optics/sessions/s09.js",
+        "./src/packs/optics/sessions/s10.js",
+        "./src/packs/optics/sessions/s11.js",
+        "./src/packs/optics/sessions/s12.js",
+        "./src/packs/optics/sessions/s13.js",
+        "./src/packs/optics/sessions/s14.js",
+        "./src/packs/optics/sessions/s15.js",
+        "./src/packs/optics/sessions/s16.js",
+        "./src/packs/optics/sessions/s17.js",
+        "./src/packs/optics/sessions/s18.js",
+        "./src/packs/optics/data.js",
+        "./src/packs/optics/widgets/_shared.js",
+        "./src/packs/optics/widgets/blackbody.js",
+        "./src/packs/optics/widgets/emwave.js",
+        "./src/packs/optics/widgets/film.js",
+        "./src/packs/optics/widgets/lens.js",
+        "./src/packs/optics/widgets/mirror.js",
+        "./src/packs/optics/widgets/phasor.js",
+        "./src/packs/optics/widgets/refraction.js",
+        "./src/packs/optics/widgets/standing.js",
+        "./src/packs/optics/widgets/young.js",
+        "./src/packs/optics/problems.js"
+      ]
+    },
+    {
+      "id": "thermo",
+      "scripts": [
+        "./src/packs/thermo/sessions/s01.js",
+        "./src/packs/thermo/sessions/s02.js",
+        "./src/packs/thermo/sessions/s03.js",
+        "./src/packs/thermo/data.js",
+        "./src/packs/thermo/widgets/pvd.js",
+        "./src/packs/thermo/widgets/thermometer.js",
+        "./src/packs/thermo/problems.js"
+      ]
+    }
+  ]
+}

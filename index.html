@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content"
+    />
+    <title>Lector</title>
+    <meta name="description" content="درس اپتیک دانشگاه فرهنگیان به‌صورت تعاملی: جلسات، مسئله‌های حل‌شده، فرمول‌ها و شبیه‌سازی‌های بصری. آفلاین و رایگان." />
+    <meta name="robots" content="index, follow" />
+    <meta name="app-version" content="1.0.1" />
+    <meta name="app-build" content="456f10a" />
+    <meta name="keywords" content="اپتیک, فیزیک, درس اپتیک, فرهنگیان, شبیه‌سازی, مسئله حل‌شده" />
+    <meta name="author" content="Lector" />
+    <link rel="canonical" href="https://physlvr.github.io/lector-site/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Lector" />
+    <meta property="og:title" content="Lector — پوستهٔ تعاملی درسنامه" />
+    <meta property="og:description" content="جلسات، مسئله‌های حل‌شده و شبیه‌سازی‌های بصری درس اپتیک." />
+    <meta property="og:url" content="https://physlvr.github.io/lector-site/" />
+    <meta property="og:locale" content="fa_IR" />
+    <meta name="twitter:card" content="summary" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Course",
+        "name": "Lector",
+        "description": "درس تعاملی اپتیک با جلسات، مسئله‌های حل‌شده و شبیه‌سازی‌های بصری",
+        "inLanguage": "fa",
+        "isAccessibleForFree": true,
+        "url": "https://physlvr.github.io/lector-site/"
+      }
+    </script>
+    <link rel="manifest" href="./manifest.json" />
+    <meta name="theme-color" content="#070b16" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f3f5fb" media="(prefers-color-scheme: light)" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Lector" />
+    <style>
+      html { background-color: #05070f; }
+      @media (prefers-color-scheme: light) {
+        html { background-color: #f4f6fb; }
+      }
+    </style>
+    <script>
+      (function () {
+        var dark = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches;
+        var mode = dark ? "dark" : "light";
+        try {
+          var ap = JSON.parse(localStorage.getItem("lector:activePack") || "null");
+          var v =
+            (ap && localStorage.getItem(ap.ns + "Pref_theme")) ||
+            (ap && ap.defaultTheme) ||
+            "system";
+          if (v === "system") mode = dark ? "dark" : "light";
+          else mode = v === "dark" ? "dark" : "light";
+        } catch (e) {}
+        document.documentElement.setAttribute("data-theme", mode);
+        document.documentElement.style.colorScheme = mode;
+      })();
+    </script>
+    <link rel="stylesheet" href="./src/vendor/fonts-local.css" />
+    <link rel="icon" type="image/svg+xml" href="./public/favicon.svg" />
+    <link rel="apple-touch-icon" href="./public/apple-touch-icon.png" />
+    <link rel="stylesheet" href="./src/vendor/vazirmatn-local.css" />
+    <link rel="stylesheet" href="./src/vendor/katex.min.css" />
+    <link rel="stylesheet" href="./src/css/tokens.css" />
+    <link rel="stylesheet" href="./src/css/base.css" />
+    <link rel="stylesheet" href="./src/css/shell.css" />
+    <link rel="stylesheet" href="./src/css/presets.css" />
+    <link rel="stylesheet" href="./src/css/surface.css" />
+    <link rel="stylesheet" href="./src/css/archetypes.css" />
+    <link rel="stylesheet" href="./src/css/shell/components.css" />
+    <link rel="stylesheet" href="./src/css/pages/session.css" />
+    <link rel="stylesheet" href="./src/css/pages/viewer.css" />
+    <link rel="stylesheet" href="./src/css/pages/problems.css" />
+    <link rel="stylesheet" href="./src/css/pages/practice.css" />
+    <link rel="stylesheet" href="./src/css/pages/plan.css" />
+    <link rel="stylesheet" href="./src/css/pages/library.css" />
+    <link rel="stylesheet" href="./src/css/pages/progress.css" />
+    <link rel="stylesheet" href="./src/css/pages/learn.css" />
+    <link rel="stylesheet" href="./src/css/pages/shop.css" />
+    <link rel="stylesheet" href="./src/css/pages/settings-sheet.css" />
+    <link rel="stylesheet" href="./src/css/pages/flashcards.css" />
+    <link rel="stylesheet" href="./src/css/pages/motion.css" />
+    <link rel="stylesheet" href="./src/css/pages/home.css" />
+    <link rel="stylesheet" href="./src/css/widgets.css" />
+    <link rel="stylesheet" href="./src/css/reading.css" />
+    <link rel="stylesheet" href="./src/css/session-rail.css" />
+    <link rel="stylesheet" href="./src/css/halo.css" />
+    <link rel="stylesheet" href="./src/css/fx.css" />
+    <link rel="stylesheet" href="src/css/toast.css" />
+    <link rel="stylesheet" href="./src/css/release.css" />
+  </head>
+
+  <body data-ui="v2">
+    <noscript>
+      <main lang="fa" dir="rtl" style="max-width:640px;margin:48px auto;padding:0 20px;font-family:Tahoma,sans-serif;line-height:1.9">
+        <h1>Lector: پوستهٔ تعاملی درسنامه</h1>
+        <p>این برنامه برای اجرا به جاوااسکریپت نیاز دارد. با فعال‌کردن جاوااسکریپت، جلسات درس، مسئله‌های حل‌شده، فرمول‌ها و شبیه‌سازی‌های بصری در دسترس قرار می‌گیرند.</p>
+      </main>
+    </noscript>
+    <div class="app-sheet">
+      <header class="top"></header>
+      <div class="shell">
+        <aside id="sidebar"></aside>
+        <main id="main"></main>
+      </div>
+      <footer id="app-footer"></footer>
+    </div>
+    <input type="file" id="importFile" accept="application/json,.json" hidden />
+
+    <div id="gtip" class="gtip" role="tooltip" hidden></div>
+
+    <div id="toastUndo" class="toast-undo" role="status" aria-live="polite" hidden>
+      <button class="undo-btn" id="toastUndoBtn" type="button" aria-label="بازگردانی">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <polyline points="9 14 4 9 9 4" />
+          <path d="M20 20v-7a4 4 0 0 0-4-4H4" />
+        </svg>
+      </button>
+      <span class="undo-txt" id="toastUndoTxt"></span>
+      <span class="undo-progress" aria-hidden="true"></span>
+    </div>
+
+    <div
+      class="modal-back"
+      id="dialogBack"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="dialogTitle"
+      hidden
+    >
+      <div class="modal dialog-modal" id="dialogModal">
+        <div class="dialog-accent" aria-hidden="true"></div>
+        <div class="dialog-body">
+          <div class="dialog-head">
+            <span class="dialog-ic" id="dialogIcon" aria-hidden="true"></span>
+            <span class="dialog-title" id="dialogTitle">تأیید</span>
+          </div>
+          <div class="dialog-msg" id="dialogMsg"></div>
+          <div id="dialogFieldWrap" style="display: none">
+            <label id="dialogFieldLabel">مقدار</label>
+            <input class="inp" id="dialogField" autocomplete="off" />
+          </div>
+          <div class="foot dialog-foot">
+            <button class="btn ghost" id="dialogCancel" type="button">انصراف</button>
+            <button class="btn g" id="dialogOk" type="button">تأیید</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./src/vendor/katex.min.js"></script>
+    <script src="./src/vendor/auto-render.min.js"></script>
+
+    <script src="./src/engine/runtime.js"></script>
+
+    <script src="./src/engine/presentation.js"></script>
+
+    <script src="./src/archetypes/registry.js"></script>
+    <script src="./src/archetypes/base.js"></script>
+    <script src="./src/archetypes/stem.js"></script>
+    <script src="./src/archetypes/narrative.js"></script>
+
+    <script src="./src/engine/motion.js"></script>
+    <script src="./src/engine/icons.js"></script>
+    <script src="./src/engine/cover-art.js"></script>
+    <script src="./src/engine/core.js"></script>
+    <script src="./src/engine/fx.js"></script>
+    <script src="./src/engine/halo.js"></script>
+    <script src="./src/engine/attempt-log.js"></script>
+    <script src="./src/engine/learning-state.js"></script>
+    <script src="./src/engine/mastery.js"></script>
+
+    <script src="./src/engine/pack-discovery.js"></script>
+
+    <script src="./src/engine/flags.js"></script>
+    <script src="./src/engine/block-types.js"></script>
+    <script src="./src/engine/knowledge-graph.js"></script>
+    <script src="./src/engine/answer-check.js"></script>
+    <script src="./src/engine/contract.js"></script>
+    <script src="./src/engine/widget-registry.js"></script>
+    <script src="./src/engine/block-renderers.js"></script>
+    <script src="./src/engine/problem-renderer.js"></script>
+    <script src="./src/engine/practice.js"></script>
+
+    <script src="./src/engine/brand.js"></script>
+    <script src="./src/engine/publish.js"></script>
+    <script src="./src/engine/preferences.js"></script>
+    <script src="./src/engine/themes.js"></script>
+    <script src="./src/engine/shop.js"></script>
+    <script src="./src/engine/search.js"></script>
+
+    <script src="./src/engine/prefs.js"></script>
+    <script src="./src/engine/session.js"></script>
+    <script src="./src/engine/pages/_shared.js"></script>
+    <script src="./src/engine/pages/lab.js"></script>
+    <script src="./src/engine/pages/refs.js"></script>
+    <script src="./src/engine/pages/glossary.js"></script>
+    <script src="./src/engine/pages/settings.js"></script>
+    <script src="./src/engine/pages/guide.js"></script>
+    <script src="./src/engine/perf/scheduler.js"></script>
+    <script src="./src/engine/pages/problems.js"></script>
+    <script src="./src/engine/pages/library.js"></script>
+    <script src="./src/engine/pages/pack.js"></script>
+    <script src="./src/engine/pages/shop.js"></script>
+    <script src="./src/engine/pages/progress.js"></script>
+    <script src="./src/engine/pages/plan.js"></script>
+    <script src="./src/engine/learn.js"></script>
+    <script src="./src/engine/flashcards.js"></script>
+    <script src="./src/engine/session-rail.js"></script>
+    <script src="./src/engine/router.js"></script>
+    <script src="./src/engine/boot.js"></script>
+
+    <script src="./src/engine/loader.js"></script>
+    <script src="./src/engine/shell.js"></script>
+    <script src="./src/engine/guard.js"></script>
+    <script src="./src/engine/sw-register.js"></script>
+    <script src="./src/engine/release.js"></script>
+    <script src="./src/app.js"></script>
+  </body>
+</html>

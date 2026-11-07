@@ -1,0 +1,37 @@
+/* ─── Effects: حالت «سبک» (data-fx-eff="lite") ───
+ * فقط جلوه‌های گران را حذف می‌کند: blur پشت‌زمینه، ماسک/clip ریل جلسات و انتقال‌های سنگین.
+ * انیمیشن‌های ورود/حرکت اصلی سر جایشان می‌مانند.
+ */
+
+html[data-fx-eff="lite"] *,
+html[data-fx-eff="lite"] *::before,
+html[data-fx-eff="lite"] *::after {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* ریل جلسات: بدون mask و clip-path که هر فریم اسکرول را دوباره رنگ می‌زنند */
+html[data-fx-eff="lite"] .sr-wheel {
+  clip-path: none;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+html[data-fx-eff="lite"] .sr-body,
+html[data-fx-eff="lite"] .sr-face {
+  will-change: auto;
+}
+html[data-fx-eff="lite"] .sr-i span {
+  transition: transform 0.2s var(--ease), color 0.2s var(--ease);
+}
+html[data-fx-eff="lite"] .sr-i {
+  transition: opacity 0.3s var(--ease), color 0.2s var(--ease);
+}
+
+/* قفل اسکرول پشت منوی فرمان */
+html.pal-lock,
+html.pal-lock body {
+  overflow: hidden;
+}
+#palette .pal-body {
+  overscroll-behavior: contain;
+}
